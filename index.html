@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Music App</title>
+</head>
+
+<body>
+    <div id="intro">
+        <div id="intro-animation-frame">
+            <div class="intro-circle"></div>
+            <div class="intro-circle"></div>
+            <div class="intro-circle"></div>
+            <div class="intro-circle"></div>
+        </div>
+        <div id="game-title">catchy tunes</div>
+    </div>
+    <div id="game">
+
+        <div id="info-box">
+            <div>
+                <p>:(</p>
+            </div>
+        </div>
+
+        <div id="modal">
+            <div id="modaltext">
+                <p>Level 0</p>
+                <p>Guess the right order of the song.</p>
+                <p> Click here to start! </p>
+            </div>
+        </div>
+
+        <div id="progress-bar">
+            <div id="arrow">
+                <div id="next-song">next song</div>
+                <div id="skip-icon">&gt;</div>
+            </div>
+            <div id="progress"></div>
+        </div>
+
+        <div id="sort-bar">
+            <div class="sort-container">1</div>
+            <div class="sort-container">2</div>
+            <div class="sort-container">3</div>
+            <div class="sort-container">4</div>
+            <div class="sort-container">5</div>
+        </div>
+
+        <div id="circle-box">
+            <div id="row-left">
+                <div class="box-left box-container"></div>
+                <div class="box-left box-container"></div>
+                <div class="box-left box-container"></div>
+            </div>
+            <div id="row-right">
+                <div class="box-right box-container"></div>
+                <div class="box-right box-container"></div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
+<script src="./app.js"></script>
+
+</html>
