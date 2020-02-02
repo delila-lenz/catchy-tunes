@@ -1,6 +1,7 @@
 # Catchy Tunes
 Das Spiel Catchy Tunes fordert das Popsong-Gedächtnis der Spieler heraus.
 
+[launche game](https://github.com/delila-lenz/catchy-tunes)
 
 Der Spielende hat zu Beginn 90 Sekunden Zeit, um sich 5 kurze Stücke aus einem Lied anzuhören und sich die Reihenfolge zu merken. Diese werden nur abgespielt, indem man jeweils auf die bunten Kreise klickt. 
 
@@ -15,4 +16,4 @@ Der Schwierigkeitsgrad erhöht sich pro Level. Die Farben unterscheiden sich wen
 
 
 Es gibt insgesamt 5 Level. Ist das letzte Level geschafft, beginnt das Spiel von vorne.
-Das Spiel ist optimiert für Handys im Fullscreenmodus
+Das Spiel ist für Handys im Fullscreenmodus optimiert.
