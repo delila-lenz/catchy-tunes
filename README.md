@@ -1,7 +1,7 @@
 # Catchy Tunes
 Das Spiel Catchy Tunes fordert das Popsong-Gedächtnis der Spieler heraus.
 
-[launche game](https://github.com/delila-lenz/catchy-tunes)
+[launche game](https://delila-lenz.github.io/catchy-tunes/)
 
 Der Spielende hat zu Beginn 90 Sekunden Zeit, um sich 5 kurze Stücke aus einem Lied anzuhören und sich die Reihenfolge zu merken. Diese werden nur abgespielt, indem man jeweils auf die bunten Kreise klickt. 
 
