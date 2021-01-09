@@ -25,11 +25,11 @@ let songs = [{
 }];
 // randomize snippets each time
 let colorSchemes = [
-    ["rgb(255, 0, 228)", "rgb(255, 43, 1)", "rgb(255, 254, 0)", "rgb(1, 60, 255)", "rgb(0, 255, 27)"],
-    ["#FBA516", "#28E0D8", "#2DA4A1", "#A9A2C4", "#FA4B86"],
-    ["#FF3B01", "#316CF4", "#FF5FDB", "#fff", "#00DFE1"],
-    ["rgb(255, 0, 228)", "rgb(255, 43, 1)", "rgb(255, 254, 0)", "rgb(1, 60, 255)", "rgb(0, 255, 27)"],
-    ["#E7ECEF", "#274C77", "#6096BA", "#A3CEF1", "rgb(71, 73, 85)"]
+    ["#defe47", "#ff00a0", "#ff124f", "#0600ff", "#fe75fe"],
+    ["#0000ff", "#e501d4", "#04ffaf", "#4985ff", "#ff080e"],
+    ["#08deea", "#fd8090", "#c4ffff", "#bb14dd", "#1261d1"],
+    ["#fdd164", "#36fdc6", "#e083d2", "#bb6cde", "#bced89"],
+    ["#fc5f58", "#f73c6b", "#c04f8a", "#ef8143", "#0a1ef7"]
 ];
 let containerNumbers = [0, 1, 2, 3, 4];
 let circleBox = document.querySelector("#circle-box");
@@ -114,16 +114,40 @@ function resetProgressBarToOrdering() {
     resetProgressBar(gameStates.ordering)
 }
 
+function makeEmoji() {
+    var emoji = document.createElement("img");
+    emoji.src = "./assets/sad-face.png";
+    emoji.className = "emoji";
+    game.appendChild(emoji);
+    var xpos = Math.floor(Math.random() * 100);
+    emoji.style.left = xpos + "vw";
+    return emoji;
+}
+
+
 function changeGameState(state) {
     let prevState = gameState;
     gameState = state;
     progress.style.background = "linear-gradient(to right, #ebbd00, #f16e00)";
     switch (gameState) {
         case gameStates.initial:
-            displayModal(`<p>Level ${currentSong + 1}</p><p>Guess the right order of the song.</p>
-            <p> Click here to start! </p>`);
+            displayModal(`<div class="title"> Level ${currentSong + 1}</div>
+            <div class="start-button">
+            <div class="intro-circle-start"></div>
+            <div class="title white">Start </div>
+            </div>`);
+
+
+            arrow.style.opacity = "0";
+
             break;
         case gameStates.listening:
+            arrow.style.opacity = "1";
+            skipInfo.innerHTML = "skip";
+            skipInfo.style.opacity = "1";
+            skipInfo.classList.add("skip");
+            arrow.classList.remove("arrow-round");
+            skipIcon.style.opacity = "0";
             arrow.addEventListener("click", resetProgressBarToOrdering);
             hideModal();
             initSong(currentSong, currentSong);
@@ -138,7 +162,7 @@ function changeGameState(state) {
             document.querySelectorAll(".circle").forEach(c => {
                 c.style.transform = "scale(0)";
             });
-            displayModal(`<p> Now drag and drop the circles in the fitting order on the numbers</p>`);
+            displayModal(`<div class = "title">Now drag </br> and drop </div> <div class="modaltext"> the circles in the fitting order on the numbers</div>`);
             progress.style.width = "100%";
             sortBar.style.display = "flex";
             break;
@@ -265,6 +289,8 @@ function startTimer(initTime, alertTime, targetState) {
     }, 1000);
 }
 
+
+
 function orderPhase() {
     hideModal();
     document.querySelectorAll(".circle").forEach(c => c.style.transform = "scale(1)");
@@ -370,21 +396,39 @@ function evaluate() {
             });
             playAudio(snippets[0]);
 
+
+
             skipInfo.innerHTML = "next song";
+            skipIcon.style.opacity = 1;
+            skipInfo.classList.remove("skip");
+            arrow.classList.add("arrow-round");
             skipInfo.style.opacity = 1;
 
             arrow.addEventListener("click", nextSong);
         } else {
-            displayInfoBox(`<div style="text-align:center" class="correct">;(</div>`);
+            displayInfoBox(`<div style="text-align:center" class="correct">wrong order</div>`);
             snippets.map(s => s.circle).forEach(c => c.style.transform = "scale(0)");
-            skipInfo.innerHTML = "try again";
+            skipInfo.innerHTML = "try  </br> again";
+            sortBar.style.display = "none";
+            skipIcon.style.opacity = 1;
+            skipInfo.classList.remove("skip");
+            arrow.classList.add("arrow-round");
             skipInfo.style.opacity = 1;
+            for (let i = 0; i < 16; i++) {
+                setTimeout(() => {
+                    let emoji = makeEmoji();
+                    setTimeout(() => emoji.remove(), 2300);
+                }, 200 * i);
+            }
             arrow.addEventListener("click", nextSong);
         }
     } catch (e) {
         displayInfoBox("Time is up :(");
         snippets.map(s => s.circle).forEach(c => c.style.transform = "scale(0)")
         skipInfo.innerHTML = "try again";
+        skipIcon.style.opacity = 1;
+        skipInfo.classList.remove("skip");
+        arrow.classList.add("arrow-round");
         skipInfo.style.opacity = 1;
         arrow.addEventListener("click", nextSong);
     }
@@ -401,16 +445,18 @@ function evaluate() {
     function renderSong(title, artist, coverSrc) {
         return `
         <div class="song-meta">
-            <div class="correct">Nice job!</div>
+            <div class="correct title">Nice job!</div>
             <br>
-            <div class="tilte">${title}</div>
-            <div class="artist">${artist}</div>
+            <div class="song-title"><h2>${title}</h2></div>
+            <div class="artist"><h3>${artist}</h3></div>
             <div class="cover">
                 <img src="${coverSrc}"/>
             </div>
         </div>`;
+
     }
 }
+
 
 function verifyOrder() {
     let correct = true;
@@ -461,6 +507,7 @@ function nextSong() {
     document.querySelectorAll(".circle").forEach(c => c.parentNode.removeChild(c));
     hideInfoBox();
     skipInfo.style.opacity = 0;
+    arrow.style.opacity = 0;
     changeGameState(gameStates.initial);
 }
 
